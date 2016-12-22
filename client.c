@@ -4,8 +4,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string.h>
+#include <arpa/inet.h>
 
-int main(){
+int main(int argc, char *argv[]){
   int clientSocket;
   char buffer[1024];
   struct sockaddr_in serverAddr;
@@ -21,7 +22,8 @@ int main(){
   /* Set port number, using htons function to use proper byte order */
   serverAddr.sin_port = htons(7891);
   /* Set IP address to localhost */
-  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    
+  serverAddr.sin_addr.s_addr = inet_addr(argv[1]);
   /* Set all bits of the padding field to 0 */
   memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);  
 
